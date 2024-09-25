@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techie Web</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="container nav-container">
+                <a href="#home" class="logo">Techie <span>Web</span></a>
+                <ul class="navlist">
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="#form-section">FORM</a></li> <!-- Link to form -->
+                    <li><a href="/submissions">SUBMISSIONS</a></li> <!-- Link to view submissions -->
+                </ul>
+                <div class="nav-icons">
+                    <div class="menu-btn">
+                        <span class="lnr lnr-menu"></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="txt-content">
+        <h2>Welcome to Techie Web – Your Gateway to the Future of the Internet!</h2>
+        <p>Techie Web is your go-to hub for the latest trends, insights, and guides on web technologies, development, and everything that powers the modern internet.
+            Stay up-to-date with the latest in web technologies, from cutting-edge frameworks to essential development tools. We bring you insightful articles, tutorials, and guides on building robust websites, mastering programming languages, and keeping pace with modern trends. Explore the evolution of web development with us, where we break down complex topics like cloud integration, responsive design, and advanced JavaScript libraries. Plus, enjoy real-time weather forecasts and stay organized with integrated date and time tracking. Submit forms effortlessly and receive instant updates – your one-stop hub for everything web-related!
+        </p>
+    </section>
+
+
+    <main>
+        <div class="content-container">
+            <h2>Date: {{ date }}</h2>
+            <h3>Time: {{ time }}</h3>
+
+            <!-- Weather Form Section -->
+            <form method="POST">
+                <label for="city">Select a city for weather info:</label>
+                <select id="city" name="city">
+                    {% for city in cities %}
+                    <option value="{{ city }}" {% if city == selected_city %}selected{% endif %}>{{ city }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Get Weather</button>
+            </form>
+
+            <div class="weather-info">
+                {% if weather %}
+                <h2>Weather in {{ weather.city }}:</h2>
+                <p>Temperature: {{ weather.temperature }} °C</p>
+                <p>Description: {{ weather.description }}</p>
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather icon">
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+     <!-- Exercise 4: Form Section -->
+    <div class="frm">
+     <div id="form-section" class="content-container">
+        <h2>Submit Your Details</h2>
+        <form action="/submit" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+   </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="contact-info">
+                <p>Contact us:</p>
+                <span>Email: info@mywebsite.com</span><br>
+                <span>Phone: +91 976 456 7890</span><br>
+                <span>Visakhapatnam, Andhra Pradesh 530018</span>
+            </div>
+
+            <div>
+                <h2>&copy; 2024 Techie Web Solutions</h2>
+            </div>
+
+            <div class="social-links">
+                <a href="https://www.facebook.com" target="_blank" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.twitter.com" target="_blank" class="social-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com" target="_blank" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com" target="_blank" class="social-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
